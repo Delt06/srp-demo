@@ -1,16 +1,18 @@
 ﻿#ifndef DEMO_RP_COMMON_HLSL
 #define DEMO_RP_COMMON_HLSL
 
+#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 #include "UnityInput.hlsl"
 
-float3 TransformObjectToWorld(float3 positionOs)
-{
-    return mul(unity_ObjectToWorld, float4(positionOs, 1.0f)).xyz;
-}
+#define UNITY_MATRIX_M unity_ObjectToWorld
+#define UNITY_MATRIX_I_M unity_WorldToObject
+#define UNITY_MATRIX_V unity_MatrixV
+#define UNITY_MATRIX_I_V unity_MatrixInvV
+#define UNITY_MATRIX_VP unity_MatrixVP
+#define UNITY_PREV_MATRIX_M unity_prev_MatrixM
+#define UNITY_PREV_MATRIX_I_M unity_prev_MatrixIM
+#define UNITY_MATRIX_P glstate_matrix_projection
 
-float4 TransformWorldToHClip(float3 positionWs)
-{
-    return mul(unity_MatrixVP, float4(positionWs, 1.0f));
-}
+#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
 
 #endif

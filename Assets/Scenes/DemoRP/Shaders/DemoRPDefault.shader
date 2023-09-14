@@ -2,6 +2,8 @@
 {
     Properties
     {
+        // Define a property with HLSL name "_MainColor", display name "Color", type Color, and default value of white
+        _MainColor ("Color", Color) = (1, 1, 1, 1) 
     }
     
     SubShader
@@ -22,5 +24,20 @@
             
             ENDHLSL
         }   
+        
+        Pass 
+        {
+            Name "Demo RP Depth"
+			Tags{ "LightMode" = "DemoRPDepthOnly" }
+            
+            HLSLPROGRAM
+
+            #pragma vertex VS
+            #pragma fragment PS
+
+            #include "DemoRPDefaultDepthOnlyPass.hlsl"
+            
+            ENDHLSL
+        }  
     }
 }
